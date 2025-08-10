@@ -1,5 +1,14 @@
 :root {
     --bs-font-lato: 'Lato';
+    --bs-white: #ffffff;
+    --bs-blue: #003B5C;
+    --bs-light-taupe: #BB7E6E;
+    --bs-pastel-pink: #DAAA97;
+    --bs-garnet: #7E3630;
+    --bs-seashell: #FDF6ED;
+    --bs-Deer: #B88259;
+    --bs-Redwood: #9C584C;
+
     --fs-12: 12px;
     --fs-14: 14px;
     --fs-16: 16px;
@@ -175,6 +184,32 @@ body {
         padding: 0 60px;
     }
 }
+.content p {
+    display: block;
+    color: var(--bs-dark);
+    font-family: var(--bs-font-lato);
+    font-size: var(--fs-16);
+    font-style: normal;
+    font-weight: 400;
+    font-stretch: normal;
+    line-height: 30px;
+    margin: 0 0 30px;
+    padding: 0;
+}
+.content p:last-child {
+    margin-bottom: 0;
+}
+.white p {
+    color: var(--bs-white);
+}
+
+.f-big p {
+    font-size: var(--fs-20);
+    line-height: 30px;
+}
+.f-light p {
+    font-weight: 300;
+}
 
 /* header start */
 header {
@@ -203,20 +238,48 @@ header.show {
 .navbar .navbar-collapse .navbar-nav a {
     padding: 0;
     margin: 0;
+    color: var(--bs-white);
     font-family: var(--bs-font-lato);
     font-size: var(--fs-16);
-    font-weight: 500;
+    font-weight: 300;
     font-style: normal;
     font-stretch: normal;
     line-height: 19px;
     display: block;
     text-transform: uppercase;
+    transition: all 300ms;
+}
+.navbar .navbar-collapse .navbar-nav a:hover {
+    color: var(--bs-blue);
 }
 .navbar .navbar-collapse .navbar-nav a img {
     display: block;
 }
 .navbar .navbar-collapse .navbar-nav .navbar-brand {
     padding: 0 30px;
+}
+.navbar .navbar-collapse .navbar-nav .nav-item .btn {
+    background-color: var(--bs-blue);
+    border: 1px solid transparent;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    color: var(--bs-white);
+    font-size: var(--fs-16);
+    font-weight: 400;
+    font-family: var(--bs-font-lato);
+    line-height: 20px;
+    display: inline-flex;
+    margin: 0;
+    padding: 9px 28px;
+    transition: all 300ms;
+}
+.navbar .navbar-collapse .navbar-nav .nav-item .btn:hover {
+    background-color: transparent;
+    border-color: var(--bs-white);
+}
+.navbar .navbar-collapse .navbar-nav .nav-item:last-child .btn {
+    padding: 10px;
 }
 /* header end */
 
@@ -254,7 +317,7 @@ header.show {
     height: 100%;
     left: 0px;
     top: 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) -6.34%, rgba(0, 0, 0, 0) 83.3%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) -6.34%, rgba(0, 0, 0, 0) 83.3%);
     transform: rotate(180deg);
 }
 
@@ -290,10 +353,20 @@ header.show {
     display: none; /* start hidden */
     cursor: pointer;
 }
+.play-ico svg circle,
+.play-ico svg path {
+    transition:  all 300ms;
+}
+.play-ico:hover svg circle {
+    fill: var(--bs-white)
+}
+.play-ico:hover svg path {
+    fill: var(--bs-blue);
+}
 .scroll-down {
     font-family: var(--bs-font-lato);
     font-size: var(--fs-18);
-    font-weight: 500;
+    font-weight: 400;
     line-height: 27px;
     letter-spacing: 0;
     display: flex;
@@ -304,3 +377,17 @@ header.show {
     gap:10px;
 }
 /* banner end */
+
+/* general content start */
+.general-content {
+    display: block;
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 100px 0 0;
+    background-color: var(--bs-blue);
+}
+.general-content .content {
+    margin-bottom: 30px;
+}
+/* general content end */

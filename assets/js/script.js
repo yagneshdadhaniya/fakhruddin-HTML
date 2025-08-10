@@ -29,7 +29,7 @@ tl.to(".overlay", {
 tl.to("#header", {
     y: 0, // slide down
     ease: "power2.out"
-}, 0.3);
+}, 0.45);
 
 // Play icon fade in + display toggle
 tl.fromTo(".play-ico",
@@ -40,12 +40,12 @@ tl.fromTo(".play-ico",
     { 
         opacity: 1, 
         display: "block", 
-        duration: 0.3, 
+        duration: 0.8, 
         ease: "power2.out",
         onStart: () => document.querySelector(".play-ico").style.display = "block",
         onReverseComplete: () => document.querySelector(".play-ico").style.display = "none"
     },
-    0.5
+    0.6
 );
 
 gsap.to(".scroll-down img", {
