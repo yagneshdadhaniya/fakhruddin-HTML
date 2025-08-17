@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     gsap.registerPlugin(ScrollTrigger);
     gsap.registerPlugin(ScrollToPlugin);
 
+
     if (document.querySelector(".banner")) {
         // Timeline for animation
         let tl = gsap.timeline({
@@ -114,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // scale calculation according to progress
                 let currentScale = 1 + (200.9 - 1) * progress;
 
-                if (currentScale >= 80) {
+                if (currentScale >= 60) {
                     gsap.to("#bgColor", { opacity: 0, duration: 1, overwrite: "auto" });
                     gsap.to("#bgVideo1 video", { opacity: 1, duration: 1, overwrite: "auto" });
                 } else {
@@ -138,16 +139,37 @@ document.addEventListener("DOMContentLoaded", function () {
     if (document.querySelector(".parallax-img")) {
         // parallax image annimation
         gsap.to(".parallax-img img", {
-            y: "-10%",
+            y: "-20%",
             ease: "none",
             scrollTrigger: {
-                trigger: ".zigzag-content-with-img", 
+                trigger: ".parallax-img", 
                 start: "top bottom",
                 end: "bottom top",
                 scrub: 1, 
             }
         });
     }
+
+    if (document.querySelector(".anim-expand")) {
+
+        gsap.fromTo(".anim-expand .img img",
+            {
+                scale: 0.7,
+                clipPath: "inset(100% 0 0 0)"
+            },
+            {
+                scale: 1,
+                clipPath: "inset(0% 0 0 0)",
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".anim-expand",
+                    start: "top 50%",
+                    toggleActions: "play none none none"
+                }
+            }
+        );
+    }
+
 
     if (document.querySelector(".luxuries-wrapper")) {
         new Swiper(".luxuries-slider", {
@@ -164,6 +186,41 @@ document.addEventListener("DOMContentLoaded", function () {
                 nextEl: ".luxuries-button-next",
                 prevEl: ".luxuries-button-prev",
             },
+        });
+    }
+
+    if (document.querySelector(".parallax-layout")) {
+        document.querySelectorAll(".parallax-layout .img").forEach((box) => {
+            let speed = box.dataset.speed || 1;
+
+            gsap.to(box.querySelector("img"), {
+                y: () => `${speed * 100}px`,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: box,
+                        start: "top bottom",   
+                        end: "bottom top",     
+                        scrub: 0.5            
+                }
+            });
+        });
+    }
+
+    if (document.querySelector(".island-wrapper")) {
+        document.fonts.ready.then(() => {
+            Splitting();
+    
+            gsap.from(".fill-text .word", {
+                opacity: 0.4,
+                duration: 0.8,
+                ease: "sine.out",
+                stagger: 0.1,
+                scrollTrigger: {
+                    trigger: ".island-wrapper",
+                    start: "top 25%",     
+                    toggleActions: "restart none none none", 
+                }
+            });
         });
     }
     

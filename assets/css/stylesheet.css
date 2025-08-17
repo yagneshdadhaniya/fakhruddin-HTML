@@ -15,6 +15,7 @@
     --fs-28: 28px;
     --fs-30: 30px;
     --fs-32: 32px;
+    --fs-36: 36px;
     --fs-42: 42px;
     --fs-48: 48px;
     --fs-52: 52px;
@@ -532,13 +533,24 @@ header.show {
     font-stretch: normal;
     line-height: 24px;
     font-size: var(--fs-18);
-    letter-spacing: 0.26em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     margin: 0 0 10px;
     padding: 0;
 }
 .pre-heading.blue {
     color: var(--bs-blue);
+}
+.title-white h1,
+.title-white h2,
+.title-white h3,
+.title-white h4,
+.title-white h5,
+.title-white h6 {
+    color: var(--bs-white);
+    font-family: var(--bs-font-lato);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
 }
 .title-blue h1,
 .title-blue h2,
@@ -549,6 +561,7 @@ header.show {
     color: var(--bs-blue);
     font-family: var(--bs-font-lato);
     text-transform: uppercase;
+    letter-spacing: 0.06em;
 }
 
 .zigzag-content-with-img .title .h2 {
@@ -574,11 +587,10 @@ header.show {
 .zigzag-content-with-img .img img {
     width: 100%;
     height: 100%;
-    /* position: absolute;
-    top: 0;
-    left: 0; */
     object-fit: cover;
     object-position: right;
+    transform-origin: center;
+    clip-path: inset(100% 0 0 0);
 }
 @media (min-width: 992px) {
     .zigzag-content-with-img .col-lg-7 {
@@ -693,3 +705,222 @@ header.show {
     fill-opacity: 1;
 }
 /* luxuries-wrapper end */
+
+/* floor-plan-wrapper start */
+.floor-plan-wrapper {
+    padding: 100px 0;
+    background-color: var(--bs-blue);
+}
+.floor-plan-wrapper .title h2 {
+    display: block;
+    font-size: var(--fs-52);
+    font-weight: 600;
+    font-style: normal;
+    margin: 0 0 100px;
+    padding: 0;
+}
+.fp-row {
+    display: flex;
+    flex-flow: wrap;
+    align-items: start;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 0 50px;
+    padding: 0 0 50px;
+    border-bottom: 1px solid var(--bs-white);
+    gap: calc(60/1440*100vw);
+}
+.fp-row:last-child {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+.fp-title h3,
+.fp-title .h5 {
+    display: block;
+    color: var(--bs-white);
+    font-size: var(--fs-24);
+    font-family: var(--bs-font-lato);
+    font-weight: 400;
+    font-style: normal;
+    line-height: 29px;
+    text-transform: uppercase;
+}
+.fp-details,
+.fp-col {
+    display: flex;
+    flex-flow: wrap;
+    align-items: start;
+    justify-content: center;
+    gap: calc(60/1440*100vw);
+}
+.fp-box {
+    flex: 1 1 max-content;
+}
+.fp-box p {
+    display: block;
+    color: var(--bs-white);
+    font-size: var(--fs-18);
+    font-family: var(--bs-font-lato);
+    font-weight: 400;
+    font-style: normal;
+    line-height: 26px;
+}
+.fp-ico a svg path:first-child {
+    transition-duration: .3s;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-timing-function: linear;
+}
+.fp-row:hover .fp-ico a svg path {
+    stroke-width: 2px;
+    stroke-linecap:round;
+    stroke-linejoin: round;
+    stroke: var(--bs-white);
+    fill: transparent;
+}
+/* floor-plan-wrapper end */
+
+/* three-box-wrapper start */
+.three-box-wrapper {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 100px 0 100px;
+    background: linear-gradient(180deg, #E6F8FF 0%, #F4FCFF 100%);
+}
+.three-box-wrapper .img {
+  position: relative;
+  aspect-ratio: 380/452;
+}
+.three-box-wrapper .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;  
+  transform: translateY(0);
+  will-change: transform;
+  border: none;
+  border-bottom: 10px solid var(--bs-blue);
+}
+/* three-box-wrapper end */
+
+/* island-wrapper start */
+.island-wrapper {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 100px 0;
+    background: linear-gradient(180deg, #E7F8FF 0%, #E7F8FF 100%); /*#F4FCFF*/
+}
+.island-wrapper .fill-text .h3 {
+    font-family: var(--bs-font-lato);
+    font-weight: 400;
+    font-size: var(--fs-36);
+    line-height: 60px;
+    letter-spacing: 0.08em;
+    display:block;
+    text-transform: capitalize;
+    color: rgb(0, 59, 92);
+}
+.island-wrapper .plan {
+    display: flex;
+    flex-flow: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(50 / 1440 * 100vw);
+    margin: 100px 0 0;
+}
+.island-wrapper .plan .plan-title .h5 {
+    display: block;
+    color: var(--bs-blue);
+    font-family: var(--bs-font-lato);
+    font-size: var(--fs-24);
+    font-weight: bold;
+    font-style: normal;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+.island-wrapper .plan .plan-details {
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+.island-wrapper .plan .plan-details .plan-bx {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 max-content;
+    gap: 10px;
+}
+.island-wrapper .plan .plan-details .plan-bx span {
+    display: block;
+    color: var(--bs-blue);
+    font-family: var(--bs-font-lato);
+    font-size: var(--fs-52);
+    font-weight: 600;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.06em;
+    margin: 0;
+    padding: 0;
+}
+.island-wrapper .plan .plan-details .plan-bx p {
+    display: block;
+    color: var(--bs-blue);
+    font-family: var(--bs-font-lato);
+    font-size: var(--fs-14);
+    font-weight: 400;
+    font-style: normal;
+    line-height: 22px;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    max-width: 150px;
+}
+.island-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    object-fit: cover;
+    mix-blend-mode: luminosity;
+}
+.island-wrapper .container-fluid {
+    position: relative;
+    z-index: 1;
+}
+/* island-wrapper end */
+
+/* full-banner-wrapper start */
+.full-banner-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+}
+.full-banner-wrapper .img {
+    aspect-ratio: 1440/900;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.full-banner-wrapper .img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right;
+    transform: scale(1.2);
+}
+/* full-banner-wrapper end */
