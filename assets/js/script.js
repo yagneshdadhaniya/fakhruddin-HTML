@@ -4,25 +4,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     if (document.querySelector(".banner")) {
-        // Timeline for animation
+        let banner = document.querySelector(".banner");
+
+        // Function to get center in vh
+        function getBannerCenterVH() {
+            let bannerCenterPX = banner.offsetHeight / 2;
+            return (bannerCenterPX / window.innerHeight) * 100; // convert px to vh
+        }
+
+        let bannerCenterVH = getBannerCenterVH();
+
         let tl = gsap.timeline({
             scrollTrigger: {
                 trigger: ".banner",
                 start: "top top",
-                end: "bottom top",
-                scrub: 1,
+                end: "+=500%",
+                scrub: 3,
                 pin: true,
             }
         });
 
-        tl.fromTo(".navbar-brand", { 
-            top: '25dvw', 
-            scale: 1,
-        }, { 
-            top: -30, 
-            scale: 0.275,
-            ease: "power2.out" 
-        }, 0.5);
+        // Logo animation (center to top-left)
+        tl.fromTo(".navbar-brand", 
+            { 
+                position: "fixed",
+                top: bannerCenterVH + "vh", // dynamic center in vh
+                left: "50%",
+                xPercent: -50,
+                yPercent: -50,
+                scale: 1
+            }, 
+            { 
+                position: "absolute",
+                top: -30, 
+                left: "50%",
+                xPercent: -50,
+                yPercent: 0,
+                scale: 0.275,
+                ease: "power2.out"
+            }, 
+            0.5
+        );
 
         // Overlay fade out
         tl.to(".overlay", {
@@ -32,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Header slide in
         tl.to("#header", {
-            y: 0, // slide down
+            y: 0, 
             ease: "power2.out"
         }, 0.5);
 
@@ -53,14 +75,16 @@ document.addEventListener("DOMContentLoaded", function () {
             0.8
         );
 
+        // Scroll down bounce
         gsap.to(".scroll-down img", {
-            y: 10, // move down 10px
+            y: 10, 
             duration: 0.8,
-            repeat: -1, // infinite
+            repeat: -1, 
             yoyo: true,
             ease: "power1.inOut"
         });
 
+        // Video play button
         const playBtn = document.getElementById('playButton');
         const video = document.getElementById('bannerVideo');
 
@@ -70,7 +94,14 @@ document.addEventListener("DOMContentLoaded", function () {
             video.muted = false;
             video.play();
         });
+
+        // Recalculate center on resize
+        window.addEventListener("resize", () => {
+            let newCenterVH = getBannerCenterVH();
+            gsap.set(".navbar-brand", { top: newCenterVH + "vh" });
+        });
     }
+
 
     document.querySelector('[data-id="scroll"]').addEventListener('click', function () {
         gsap.to(window, {
@@ -84,23 +115,44 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     if (document.querySelector(".innovation-text")) {
+
+        function getFitScale(elem) {
+            let el = document.querySelector(elem);
+            if (!el) return 1;
+
+            let rect = (el instanceof SVGGraphicsElement && el.getBBox) 
+                ? el.getBBox() 
+                : el.getBoundingClientRect();
+
+            if (rect.width === 0 || rect.height === 0) return 1;
+
+            let scaleX = window.innerWidth / rect.width;
+            let scaleY = window.innerHeight / rect.height;
+
+            return Math.max(scaleX, scaleY) * 15; // extra 20% buffer
+        }
+
+        let finalScale = getFitScale("#top-text");
+
         let innovation = gsap.timeline({
             scrollTrigger: {
                 trigger: ".innovation-text",
                 start: "top top",
                 end: "+=120%",
-                scrub: 1,
-                pin: true
+                scrub: 3,
+                pin: true,
+                onRefresh: () => {
+                    finalScale = getFitScale("#top-text"); 
+                }
             }
-        });        
+        });
 
-        // TOP TEXT animation
-        innovation.fromTo("#top-text", 
-            { scale: 1, transformOrigin: "center" }, 
+        innovation.fromTo("#top-text",
+            { scale: 1, transformOrigin: "50% 50%" },
             { 
-                scale: 200.9, 
-                transformOrigin: "50.734% 50%",
-                ease: "power2.inOut",
+                scale: () => finalScale, 
+                transformOrigin: "50% 50%",
+                ease: "power2.inOut"
             }
         );
 
@@ -110,12 +162,10 @@ document.addEventListener("DOMContentLoaded", function () {
             end: "+=120%",
             scrub: 1,
             onUpdate: (self) => {
-                // progress 0 → 1
                 let progress = self.progress; 
-                // scale calculation according to progress
-                let currentScale = 1 + (200.9 - 1) * progress;
+                let currentScale = 1 + (finalScale - 1) * progress;
 
-                if (currentScale >= 60) {
+                if (currentScale >= finalScale / 2) {
                     gsap.to("#bgColor", { opacity: 0, duration: 1, overwrite: "auto" });
                     gsap.to("#bgVideo1 video", { opacity: 1, duration: 1, overwrite: "auto" });
                 } else {
@@ -124,16 +174,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
         });
-
-        // innovation.to("#bgColor", { 
-        //     opacity: 0, 
-        //     ease: "power2.out" 
-        // }, ">-0.1%");
-
-        // innovation.to("#bgVideo1 video", { 
-        //     opacity: 1, 
-        //     ease: "power1.out" 
-        // }, "<");
+        window.addEventListener("resize", () => {
+            finalScale = getFitScale("#top-text");
+            ScrollTrigger.refresh();
+        });
     }
 
     if (document.querySelector(".parallax-img")) {

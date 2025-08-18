@@ -175,7 +175,7 @@ body {
 }
 
 .container-fluid {
-    padding: 0 120px;
+    padding: 0 20px;
     @media (min-width: 1200px) and (max-width: 1439px) {
         padding: 0 100px;
     }
@@ -236,8 +236,6 @@ header.show {
     margin: 0;
     width: 795px;
     height: 110px;
-    left: 50%;
-    transform: translateX(-50%);
     z-index: 3;
     transition: all 300ms;
 }
