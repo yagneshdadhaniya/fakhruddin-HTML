@@ -157,7 +157,7 @@ video {
     padding: 0;
     border: 0;
     vertical-align: baseline;
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;;
 }
 
 body {
@@ -172,6 +172,10 @@ body {
     font-size: var(--fs-16);
     line-height: 160%;
     color: var(--bs-dark);
+}
+
+img {
+    display: block;
 }
 
 .container-fluid {
@@ -907,18 +911,96 @@ header.show {
     overflow: hidden;
     width: 100%;
     height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
-.full-banner-wrapper .img {
-    aspect-ratio: 1440/900;
+/* full-banner-wrapper end */
+
+/* location-wrapper start */
+.location-wrapper {
+    display: block;
+    position: relative;
     width: 100%;
+    padding: 100px 0;
+}
+.location-wrapper .title {
+    margin-bottom: 16px;
+}
+.location-wrapper .content {
+    margin-bottom: 60px;
+}
+.location-wrapper .img {
+    display: block;
     position: relative;
     overflow: hidden;
+    padding-top: 75%;
+    margin-bottom: 100px;
 }
-.full-banner-wrapper .img img {
+.location-wrapper .img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: right;
-    transform: scale(1.2);
+    position: absolute;
+    top: 0;
+    left: 0;
 }
-/* full-banner-wrapper end */
+.location-wrapper .location-history .title {
+    margin-bottom: 35px;
+}
+.location-wrapper .location-history .place {
+    display: flex;
+    flex-flow: wrap;
+    align-items: start;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+}
+.location-wrapper .location-history .place .box {
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    flex: 1 1 0;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+}
+.location-wrapper .location-history .place .box .bx-lft {
+    display: block;
+    width: 100%;
+    max-width: 68px;
+}
+.location-wrapper .location-history .place .box .bx-rgt {
+    display: block;
+    width: 100%;
+    max-width: calc(100% - 98px);
+}
+.location-wrapper .location-history .place .box .bx-rgt p {
+    display: block;
+    font-size: var(--fs-16);
+    font-family: var(--bs-font-lato);
+    font-weight: 600;
+    font-style: normal;
+    line-height: 19px;
+    letter-spacing: 0.12em;
+    color: var(--bs-blue);
+    margin: 0;
+    padding: 0;
+}
+.location-wrapper .location-history .place .box .bx-rgt span {
+    display: block;
+    font-size: var(--fs-14);
+    font-family: var(--bs-font-lato);
+    font-weight: 400;
+    font-style: normal;
+    line-height: 22px;
+    color: #969696;
+    margin: 0;
+    padding: 0;
+}
+/* location-wrapper end */

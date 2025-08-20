@@ -102,7 +102,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-
     document.querySelector('[data-id="scroll"]').addEventListener('click', function () {
         gsap.to(window, {
             duration: 1,
@@ -214,7 +213,6 @@ document.addEventListener("DOMContentLoaded", function () {
         );
     }
 
-
     if (document.querySelector(".luxuries-wrapper")) {
         new Swiper(".luxuries-slider", {
             loop: true,
@@ -230,23 +228,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 nextEl: ".luxuries-button-next",
                 prevEl: ".luxuries-button-prev",
             },
-        });
-    }
-
-    if (document.querySelector(".parallax-layout")) {
-        document.querySelectorAll(".parallax-layout .img").forEach((box) => {
-            let speed = box.dataset.speed || 1;
-
-            gsap.to(box.querySelector("img"), {
-                y: () => `${speed * 100}px`,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: box,
-                        start: "top bottom",   
-                        end: "bottom top",     
-                        scrub: 0.5            
-                }
-            });
         });
     }
 
