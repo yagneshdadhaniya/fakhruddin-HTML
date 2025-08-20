@@ -15,6 +15,7 @@
     --fs-28: 28px;
     --fs-30: 30px;
     --fs-32: 32px;
+    --fs-34: 34px;
     --fs-36: 36px;
     --fs-42: 42px;
     --fs-48: 48px;
@@ -1004,3 +1005,48 @@ header.show {
     padding: 0;
 }
 /* location-wrapper end */
+
+/* contact-wrapper start */
+.contact-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 100px 0;
+    margin: 0;
+}
+.contact-wrapper:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.contact-wrapper .contact-box {
+    display: block;
+    position: relative;
+    background-color: var(--bs-white);
+    border-radius: 8px;
+    padding: 30px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+}
+.contact-wrapper .contact-box .title {
+    text-align: center;
+    margin: 0 0 40px;
+}
+.contact-wrapper .contact-box .title h2.h4 {
+    font-size: var(--fs-34);
+    font-weight: 600;
+    font-style: normal;
+    line-height: 41px;
+    margin: 0;
+    padding: 0;
+}
+/* contact-wrapper end */
