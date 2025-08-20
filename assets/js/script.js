@@ -231,6 +231,23 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    if (document.querySelector(".parallax-layout")) {
+        document.querySelectorAll(".parallax-layout .img").forEach((box) => {
+            let speed = box.dataset.speed || 1;
+
+            gsap.to(box.querySelector("img"), {
+                y: () => `${speed * 100}px`,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: box,
+                    start: "top bottom",
+                    end: "bottom top",  
+                    scrub: 2            
+                }
+            });
+        });
+    }
+
     if (document.querySelector(".island-wrapper")) {
         document.fonts.ready.then(() => {
             Splitting();
@@ -247,6 +264,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         });
+    }
+
+    if (document.querySelector(".footer")) {
+        document.getElementById('year').textContent = new Date().getFullYear();
     }
     
 });
