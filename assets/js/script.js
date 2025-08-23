@@ -3,108 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
     gsap.registerPlugin(ScrollToPlugin);
 
 
-    // if (document.querySelector(".banner")) {
-    //     let banner = document.querySelector(".banner");
-
-    //     // Function to get center in vh
-    //     function getBannerCenterVH() {
-    //         let bannerCenterPX = banner.offsetHeight / 2;
-    //         return (bannerCenterPX / window.innerHeight) * 100; // convert px to vh
-    //     }
-
-    //     let bannerCenterVH = getBannerCenterVH();
-
-    //     let tl = gsap.timeline({
-    //         scrollTrigger: {
-    //             trigger: ".banner",
-    //             start: "top top",
-    //             end: "+=500%",
-    //             scrub: 3,
-    //             pin: true,
-    //         }
-    //     });
-
-    //     // Logo animation (center to top-left)
-    //     tl.fromTo(".navbar-brand", 
-    //         { 
-    //             position: "fixed",
-    //             top: bannerCenterVH + "vh", // dynamic center in vh
-    //             left: "50%",
-    //             xPercent: -50,
-    //             yPercent: -50,
-    //             scale: 1
-    //         }, 
-    //         { 
-    //             position: "absolute",
-    //             top: -30, 
-    //             left: "50%",
-    //             xPercent: -50,
-    //             yPercent: 0,
-    //             scale: 0.275,
-    //             ease: "power2.out"
-    //         }, 
-    //         0.5
-    //     );
-
-    //     // Overlay fade out
-    //     tl.to(".overlay", {
-    //         backgroundColor: "rgba(0,0,0,0)",
-    //         ease: "none"
-    //     }, 0.75);
-
-    //     // Header slide in
-    //     tl.to("#header", {
-    //         y: 0, 
-    //         ease: "power2.out"
-    //     }, 0.5);
-
-    //     // Play icon fade in + display toggle
-    //     tl.fromTo(".play-ico",
-    //         { 
-    //             opacity: 0, 
-    //             display: "none" 
-    //         },
-    //         { 
-    //             opacity: 1, 
-    //             display: "block", 
-    //             duration: 0.8, 
-    //             ease: "power2.out",
-    //             onStart: () => document.querySelector(".play-ico").style.display = "block",
-    //             onReverseComplete: () => document.querySelector(".play-ico").style.display = "none"
-    //         },
-    //         0.8
-    //     );
-
-    //     // Scroll down bounce
-    //     gsap.to(".scroll-down img", {
-    //         y: 10, 
-    //         duration: 0.8,
-    //         repeat: -1, 
-    //         yoyo: true,
-    //         ease: "power1.inOut"
-    //     });
-
-    //     // Video play button
-    //     const playBtn = document.getElementById('playButton');
-    //     const video = document.getElementById('bannerVideo');
-
-    //     playBtn.addEventListener('click', function () {
-    //         video.pause();   
-    //         video.currentTime = 0;
-    //         video.muted = false;
-    //         video.play();
-    //     });
-
-    //     // Recalculate center on resize
-    //     window.addEventListener("resize", () => {
-    //         let newCenterVH = getBannerCenterVH();
-    //         gsap.set(".navbar-brand", { top: newCenterVH + "vh" });
-    //     });
-    // }
-
-    if (document.querySelector(".banner") && document.querySelector(".sticky-bar-wrapper")) {
+    if (document.querySelector(".banner")) {
         let banner = document.querySelector(".banner");
-        let stickyBar = document.querySelector(".sticky-bar-wrapper");
 
         function getBannerCenterVH() {
             let bannerCenterPX = banner.offsetHeight / 2;
@@ -120,28 +20,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 end: "+=500%",
                 scrub: 3,
                 pin: true,
-                onEnterBack: () => {
-                    gsap.to(stickyBar, { 
-                        yPercent: 100, 
-                        duration: 0.6, 
-                        ease: "power3.in" 
-                    });
-                },
-                onLeave: () => {
-                    gsap.to(stickyBar, { 
-                        yPercent: 0, 
-                        duration: 0.6, 
-                        ease: "power3.out" 
-                    });
-                }
-                
             }
         });
 
+        
         tl.fromTo(".navbar-brand", 
             { 
                 position: "fixed",
-                top: bannerCenterVH + "vh",
+                top: bannerCenterVH + "vh", 
                 left: "50%",
                 xPercent: -50,
                 yPercent: -50,
@@ -170,7 +56,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 0.5);
 
         tl.fromTo(".play-ico",
-            { opacity: 0, display: "none" },
+            { 
+                opacity: 0, 
+                display: "none" 
+            },
             { 
                 opacity: 1, 
                 display: "block", 
@@ -204,16 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
             let newCenterVH = getBannerCenterVH();
             gsap.set(".navbar-brand", { top: newCenterVH + "vh" });
         });
-
-        gsap.set(stickyBar, { 
-            yPercent: 100, 
-            position: "fixed", 
-            bottom: 0, 
-            left: 0, 
-            right: 0, 
-            zIndex: 999 
-        });
     }
+
 
     document.querySelector('[data-id="scroll"]').addEventListener('click', function () {
         gsap.to(window, {
@@ -241,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let scaleX = window.innerWidth / rect.width;
             let scaleY = window.innerHeight / rect.height;
 
-            return Math.max(scaleX, scaleY) * 15; // extra 20% buffer
+            return Math.max(scaleX, scaleY) * 15;
         }
 
         let finalScale = getFitScale("#top-text");
@@ -293,7 +174,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (document.querySelector(".parallax-img")) {
-        // parallax image annimation
         gsap.to(".parallax-img img", {
             y: "-20%",
             ease: "none",
@@ -383,5 +263,49 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('year').textContent = new Date().getFullYear();
     }
 
+    if (document.querySelector(".sticky-bar-wrapper")) {
+        let header = document.querySelector(".sticky-bar-wrapper");
+        if (!header) return;
+
+         let lastScroll = 0;
+
+        window.addEventListener("scroll", function () {
+            let currentScroll = window.scrollY;
+
+            if (currentScroll > lastScroll && currentScroll >= 3500) {
+                // scrolling down
+                header.classList.add("sticky");
+            } else {
+                // scrolling up
+                header.classList.remove("sticky");
+            }
+
+            lastScroll = currentScroll;
+        });
+    }    
+});
+
+$(document).ready(function () {
+    var lastScroll = 0;
+    var banner = $(".banner");
+    if (!banner.length) return;
+
+    var bannerBottom = banner.offset().top + banner.outerHeight();
+
+    $(window).on("scroll", function () {
+        var currentScroll = $(this).scrollTop();
+
+        if (currentScroll > bannerBottom) {
+            if (currentScroll > lastScroll) {
+                $("header").removeClass("sticky-up").addClass("sticky-down");
+            } else if (currentScroll < lastScroll) {
+                $("header").removeClass("sticky-down").addClass("sticky-up");
+            }
+        } else {
+            $("header").removeClass("sticky-down sticky-up");
+        }
+
+        lastScroll = currentScroll;
+    });
 });
 
