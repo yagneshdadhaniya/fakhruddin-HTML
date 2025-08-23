@@ -3,13 +3,112 @@ document.addEventListener("DOMContentLoaded", function () {
     gsap.registerPlugin(ScrollToPlugin);
 
 
-    if (document.querySelector(".banner")) {
-        let banner = document.querySelector(".banner");
+    // if (document.querySelector(".banner")) {
+    //     let banner = document.querySelector(".banner");
 
-        // Function to get center in vh
+    //     // Function to get center in vh
+    //     function getBannerCenterVH() {
+    //         let bannerCenterPX = banner.offsetHeight / 2;
+    //         return (bannerCenterPX / window.innerHeight) * 100; // convert px to vh
+    //     }
+
+    //     let bannerCenterVH = getBannerCenterVH();
+
+    //     let tl = gsap.timeline({
+    //         scrollTrigger: {
+    //             trigger: ".banner",
+    //             start: "top top",
+    //             end: "+=500%",
+    //             scrub: 3,
+    //             pin: true,
+    //         }
+    //     });
+
+    //     // Logo animation (center to top-left)
+    //     tl.fromTo(".navbar-brand", 
+    //         { 
+    //             position: "fixed",
+    //             top: bannerCenterVH + "vh", // dynamic center in vh
+    //             left: "50%",
+    //             xPercent: -50,
+    //             yPercent: -50,
+    //             scale: 1
+    //         }, 
+    //         { 
+    //             position: "absolute",
+    //             top: -30, 
+    //             left: "50%",
+    //             xPercent: -50,
+    //             yPercent: 0,
+    //             scale: 0.275,
+    //             ease: "power2.out"
+    //         }, 
+    //         0.5
+    //     );
+
+    //     // Overlay fade out
+    //     tl.to(".overlay", {
+    //         backgroundColor: "rgba(0,0,0,0)",
+    //         ease: "none"
+    //     }, 0.75);
+
+    //     // Header slide in
+    //     tl.to("#header", {
+    //         y: 0, 
+    //         ease: "power2.out"
+    //     }, 0.5);
+
+    //     // Play icon fade in + display toggle
+    //     tl.fromTo(".play-ico",
+    //         { 
+    //             opacity: 0, 
+    //             display: "none" 
+    //         },
+    //         { 
+    //             opacity: 1, 
+    //             display: "block", 
+    //             duration: 0.8, 
+    //             ease: "power2.out",
+    //             onStart: () => document.querySelector(".play-ico").style.display = "block",
+    //             onReverseComplete: () => document.querySelector(".play-ico").style.display = "none"
+    //         },
+    //         0.8
+    //     );
+
+    //     // Scroll down bounce
+    //     gsap.to(".scroll-down img", {
+    //         y: 10, 
+    //         duration: 0.8,
+    //         repeat: -1, 
+    //         yoyo: true,
+    //         ease: "power1.inOut"
+    //     });
+
+    //     // Video play button
+    //     const playBtn = document.getElementById('playButton');
+    //     const video = document.getElementById('bannerVideo');
+
+    //     playBtn.addEventListener('click', function () {
+    //         video.pause();   
+    //         video.currentTime = 0;
+    //         video.muted = false;
+    //         video.play();
+    //     });
+
+    //     // Recalculate center on resize
+    //     window.addEventListener("resize", () => {
+    //         let newCenterVH = getBannerCenterVH();
+    //         gsap.set(".navbar-brand", { top: newCenterVH + "vh" });
+    //     });
+    // }
+
+    if (document.querySelector(".banner") && document.querySelector(".sticky-bar-wrapper")) {
+        let banner = document.querySelector(".banner");
+        let stickyBar = document.querySelector(".sticky-bar-wrapper");
+
         function getBannerCenterVH() {
             let bannerCenterPX = banner.offsetHeight / 2;
-            return (bannerCenterPX / window.innerHeight) * 100; // convert px to vh
+            return (bannerCenterPX / window.innerHeight) * 100;
         }
 
         let bannerCenterVH = getBannerCenterVH();
@@ -21,14 +120,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 end: "+=500%",
                 scrub: 3,
                 pin: true,
+                onEnterBack: () => {
+                    gsap.to(stickyBar, { 
+                        yPercent: 100, 
+                        duration: 0.6, 
+                        ease: "power3.in" 
+                    });
+                },
+                onLeave: () => {
+                    gsap.to(stickyBar, { 
+                        yPercent: 0, 
+                        duration: 0.6, 
+                        ease: "power3.out" 
+                    });
+                }
+                
             }
         });
 
-        // Logo animation (center to top-left)
         tl.fromTo(".navbar-brand", 
             { 
                 position: "fixed",
-                top: bannerCenterVH + "vh", // dynamic center in vh
+                top: bannerCenterVH + "vh",
                 left: "50%",
                 xPercent: -50,
                 yPercent: -50,
@@ -46,24 +159,18 @@ document.addEventListener("DOMContentLoaded", function () {
             0.5
         );
 
-        // Overlay fade out
         tl.to(".overlay", {
             backgroundColor: "rgba(0,0,0,0)",
             ease: "none"
         }, 0.75);
 
-        // Header slide in
         tl.to("#header", {
             y: 0, 
             ease: "power2.out"
         }, 0.5);
 
-        // Play icon fade in + display toggle
         tl.fromTo(".play-ico",
-            { 
-                opacity: 0, 
-                display: "none" 
-            },
+            { opacity: 0, display: "none" },
             { 
                 opacity: 1, 
                 display: "block", 
@@ -75,7 +182,6 @@ document.addEventListener("DOMContentLoaded", function () {
             0.8
         );
 
-        // Scroll down bounce
         gsap.to(".scroll-down img", {
             y: 10, 
             duration: 0.8,
@@ -84,7 +190,6 @@ document.addEventListener("DOMContentLoaded", function () {
             ease: "power1.inOut"
         });
 
-        // Video play button
         const playBtn = document.getElementById('playButton');
         const video = document.getElementById('bannerVideo');
 
@@ -95,10 +200,18 @@ document.addEventListener("DOMContentLoaded", function () {
             video.play();
         });
 
-        // Recalculate center on resize
         window.addEventListener("resize", () => {
             let newCenterVH = getBannerCenterVH();
             gsap.set(".navbar-brand", { top: newCenterVH + "vh" });
+        });
+
+        gsap.set(stickyBar, { 
+            yPercent: 100, 
+            position: "fixed", 
+            bottom: 0, 
+            left: 0, 
+            right: 0, 
+            zIndex: 999 
         });
     }
 
@@ -269,6 +382,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (document.querySelector(".footer")) {
         document.getElementById('year').textContent = new Date().getFullYear();
     }
-    
+
 });
 
